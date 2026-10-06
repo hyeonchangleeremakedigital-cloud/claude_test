@@ -1,0 +1,10 @@
+{
+  "client_id": "https://raw.githubusercontent.com/hyeonchangleeremakedigital-cloud/claude_test/karrot-oauth-setup/karrot-client.json",
+  "client_name": "Daangn Spend Monitor - GitHub Automation Setup",
+  "client_uri": "https://github.com/hyeonchangleeremakedigital-cloud/claude_test",
+  "redirect_uris": ["http://127.0.0.1:8765/callback"],
+  "grant_types": ["authorization_code", "refresh_token"],
+  "response_types": ["code"],
+  "token_endpoint_auth_method": "none",
+  "scope": "ads:read offline_access"
+}
