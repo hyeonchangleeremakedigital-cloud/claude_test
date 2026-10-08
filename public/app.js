@@ -8,7 +8,7 @@ const current=()=>state.banners.find(b=>b.id===state.activeId)||state.banners[0]
 const selectedLayer=()=>current()?.layers.find(l=>l.id===selected);
 function toast(message){$('#toast').textContent=message;$('#toast').classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').classList.remove('visible'),4000);}
 function remember(){history.push(clone(state));if(history.length>30)history.shift();future=[];}
-function mutate(fn,{refresh=true}={}){remember();fn();if(refresh)refreshAll();else{paint();scheduleSave();}}
+function mutate(fn,{refresh=true}={}){remember();fn();if(refresh)refreshAll();else{paint();renderStrip();$('#undo').disabled=!history.length;$('#redo').disabled=!future.length;if(!$('#gallery-view').hidden)renderGallery();scheduleSave();}}
 function captureBrief(){return{name:$('#project-name').value.trim()||'새 배너',brand:$('#brand').value,main:$('#main-copy').value,sub:$('#sub-copy').value,cta:$('#cta-copy').value,footnote:$('#footnote').value,notes:$('#notes').value,accent:$('#accent').value,...assets};}
 function updateForm(brief){for(const [id,key] of [['project-name','name'],['brand','brand'],['main-copy','main'],['sub-copy','sub'],['cta-copy','cta'],['footnote','footnote'],['notes','notes'],['accent','accent']])if(brief[key]!==undefined)$('#'+id).value=brief[key];assets={photo:brief.photo||'',logo:brief.logo||'',reference:brief.reference||''};updateAssetPreviews();}
 function updateAssetPreviews(){for(const role of ['photo','logo']){const im=$('#'+role+'-drop img');im.hidden=!assets[role];if(assets[role])im.src=assets[role];else im.removeAttribute('src');}$('#reference-preview').hidden=!assets.reference;if(assets.reference)$('#reference-preview img').src=assets.reference;}

@@ -2,7 +2,7 @@ export const SIZES = {'1:1':[1200,1200],'16:9':[1920,1080],'9:16':[1080,1920],'1
 export const TEMPLATES = [{id:'photo',name:'포토 임팩트',desc:'실사 사진 · 선명한 헤드라인',color:'#08d5df'},{id:'thread',name:'스레드 스토리',desc:'일상 사진 · 소셜 포스트 구성',color:'#a5b4fc'},{id:'card',name:'클린 카드',desc:'화이트 프레임 · 컬러 포인트',color:'#7945d5'}];
 export const clone = o => structuredClone(o);
 export const uid = () => crypto.randomUUID();
-const layer = (role,type,x,y,w,h,extra={}) => ({id:uid(),role,name:role,type,x:Math.round(x),y:Math.round(y),w:Math.round(w),h:Math.round(h),visible:true,locked:false,opacity:1,rotation:0,...extra});
+const layer = (role,type,x,y,w,h,extra={}) => ({id:uid(),role,name:role,type,x:Math.round(x),y:Math.round(y),w:Math.round(w),h:Math.round(h),visible:true,locked:role==='배경'||type==='gradient',opacity:1,rotation:0,...extra});
 const txt = (role,text,x,y,w,h,size,extra={}) => layer(role,'text',x,y,w,h,{text,fontSize:size,fontFamily:'Arial, "Malgun Gothic", sans-serif',weight:800,color:'#ffffff',align:'left',lineHeight:1.17,...extra});
 export function createBanner(brief,ratio='1:1',template='photo') {
  const [W,H]=SIZES[ratio]||SIZES['1:1']; const wide=W/H>1.5; const tall=H/W>1.5; const s=Math.min(W,H); const p=s*.055; const accent=brief.accent||TEMPLATES.find(t=>t.id===template)?.color||'#08d5df'; const layers=[];
