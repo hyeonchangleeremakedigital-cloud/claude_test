@@ -1,5 +1,7 @@
-.env
-.env.*
-__pycache__/
-*.pyc
-.venv/
+node_modules/
+dist/
+.vercel/
+.env*
+!.env.example
+test-results/
+*.log
